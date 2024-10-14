@@ -31,10 +31,17 @@ provider "aws" {
   region = "us-east-1"  # Change this to your desired AWS region
 }
 
-resource "aws_instance" "example_instance" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Specify your desired AMI ID
-  instance_type = "t2.micro"
-  key_name      = "your-key-pair"  # Specify your key pair name
+# Resource Block
+resource "aws_instance" "web" {
+  ami                  = "ami-05134c8ef96964280"
+  instance_type        = "t2.micro"
+  key_name             = "oregon"
+  vpc_security_group_ids = var.aws_security_groups  # Use vpc_security_group_ids for security group IDs
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
 
   # Add other necessary configuration for your instance (e.g., subnet, security group, etc.)
 }
